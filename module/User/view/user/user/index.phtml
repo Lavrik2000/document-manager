@@ -1,0 +1,60 @@
+<?php
+$this->headTitle('Users');
+
+$this->mainMenu()->setActiveItemId('users');
+
+$this->pageBreadcrumbs()->setItems([
+            'Дом'=>$this->url('home'),
+            'Менеджер пол-ей'=>$this->url('users'),
+            ]);
+?>
+
+<h1>Менеджер пользователей</h1>
+
+<!--<p>
+<a class="btn btn-default" href="
+    <?= $this->url('users', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New User
+</a>
+</p>-->
+
+<table class="table table-striped">
+
+   <tr>
+        <th>ID</th>
+        <th>Почта</th>
+        <th>Имя</th>
+        <th>Дата регистрации</th>
+        <th>Статус</th>        
+        <th>Действия</th>        
+    </tr>
+    
+    <?php foreach ($users as $user): ?>
+    
+    <tr>
+        <td><?= $this->escapeHtml($user->getId()); ?></td>
+        <td>
+            <a href="<?= $this->url('users', ['action'=>'view', 'id'=>$user->getId()]); ?>">
+                <?= $this->escapeHtml($user->getEmail()); ?>
+            </a> 
+        </td>
+        <td><?= $this->escapeHtml($user->getFullName()); ?></a> 
+        </td>
+        <td><?= $this->escapeHtml($user->getDateCreated()); ?></td>        
+        <td><?= $this->escapeHtml($user->getStatusAsString()); ?></td>
+        <td>
+            <a class="btn btn-info" href="<?= $this->url('users', 
+                    ['action'=>'edit', 'id'=>$user->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edit
+            </a>
+            <a class="btn btn-default" href="<?= $this->url('users',
+                    ['action'=>'change-password', 'id'=>$user->getId()]); ?>">
+                <span class="glyphicon glyphicon-asterisk"></span> Change Password
+            </a>
+        </td>    
+    </tr>
+        
+    <?php endforeach; ?>   
+    
+</table>
+

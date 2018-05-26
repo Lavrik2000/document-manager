@@ -1,0 +1,80 @@
+<?php
+$this->headTitle('Создать документ');
+
+$this->mainMenu()->setActiveItemId('documents');
+
+$this->pageBreadcrumbs()->setItems([
+            'Дом'=>$this->url('home'),
+            'Менеджер док-ов'=>$this->url('documents'),
+            'Добавить документ'=>$this->url('documents', ['action'=>'add'])
+            ]);
+
+$form->get('name')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+
+$form->get('number')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+
+$form->get('depart_issue')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('date_issue')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+//$form->get('author')->setAttributes([
+//    'class'=>'form-control'
+//    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+
+$form->prepare();
+?>
+
+<h1>Создать документ</h1>
+
+<p>
+    Заполните форму и нажмите кнопку <i>Отправить</i>..
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('name')); ?>
+            <?= $this->formElement($form->get('name')); ?>
+            <?= $this->formElementErrors($form->get('name')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('number')); ?>
+            <?= $this->formElement($form->get('number')); ?>
+            <?= $this->formElementErrors($form->get('number')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('depart_issue')); ?>
+            <?= $this->formElement($form->get('depart_issue')); ?>
+            <?= $this->formElementErrors($form->get('depart_issue')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('date_issue')); ?>
+            <?= $this->formElement($form->get('date_issue')); ?>
+            <?= $this->formElementErrors($form->get('date_issue')); ?>                  
+        </div>
+        
+
+        
+        <?= $this->formElement($form->get('submit')); ?>
+        
+        <?= $this->form()->closeTag(); ?>
+    </div>    
+</div>   
+

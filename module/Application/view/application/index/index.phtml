@@ -1,0 +1,26 @@
+<?php
+$this->headTitle('Welcome');
+
+$this->mainMenu()->setActiveItemId('home');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home')
+            ]);
+?>
+
+<h1>Привет!</h1>
+
+<p>
+   Тестовое задание. Администрирование пользователей и документов на zend-3.
+</p>
+
+<p>
+    
+    <ul>
+        <li>Username: <em>test@bk.ru</em></li>
+        <li>Password: <em>123456</em></li>
+    </ul>    
+</p>
+
+
+

@@ -1,0 +1,91 @@
+<?php
+$this->headTitle('Список документов');
+
+
+$this->mainMenu()->setActiveItemId('documents');
+
+$this->pageBreadcrumbs()->setItems([
+            'Дом'=>$this->url('home'),
+            'Менеджер документов'=>$this->url('documents'),
+            ]);
+?>
+
+<h1>Менеджер документов </h1>
+
+<p>
+<a class="btn btn-default" href="<?=$this->url('documents', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Новый документ
+</a>
+</p>
+
+<table class="table table-striped">
+
+   <tr><?=null// $this->url($this->route, [], ['documents'=>['field'=>'id','order'=>'DESC']]); ?>
+        <th>ID<a  href="<?= $this->url('documents',['action'=>'index','id'=>'1',
+            'field'=>'id','order'=>'DESC']); ?>">
+                <span class='glyphicon glyphicon-arrow-down'></span></a>
+                <a  href="<?= $this->url('documents',['action'=>'index','id'=>'1',
+                'field'=>'id','order'=>'ASC']); ?>">
+                <span class='glyphicon glyphicon-arrow-up'></span></a>
+        </th>
+        <th>Имя док-та</th>
+        <th>Номер док-та<a  href="<?= $this->url('documents',['action'=>'index','id'=>'1',
+            'field'=>'number','order'=>'DESC']); ?>"> <span class='glyphicon glyphicon-arrow-down'>
+             </span></a><a  href="<?= $this->url('documents',['action'=>'index','id'=>'1',
+            'field'=>'number','order'=>'ASC']); ?>"> <span class='glyphicon glyphicon-arrow-up'>
+             </span></a>
+        </th>
+        <th>Кем выдан</th>
+        <th>Дата выдачи<a  href="<?= $this->url('documents',['action'=>'index','id'=>'1',
+            'field'=>'date_issue','order'=>'DESC']); ?>"> <span class='glyphicon glyphicon-arrow-down'>
+            </span></a><a  href="<?= $this->url('documents',['action'=>'index','id'=>'1',
+            'field'=>'date_issue','order'=>'ASC']); ?>"> <span class='glyphicon glyphicon-arrow-up'>
+            </span></a>
+        </th>        
+        <th>Автор</th>   
+        <th>Действия</th> 
+    </tr>
+    
+    <?php foreach ($documents as $document): ?>
+    
+    <tr>
+        <td><?= $this->escapeHtml($document->getId()); ?></td>
+        <td>
+            <a href="<?= $this->url('documents', ['action'=>'view', 'id'=>$document->getId()]); ?>">
+                <?= $this->escapeHtml($document->getName()); ?>
+            </a> 
+        </td>
+        <td><?= $this->escapeHtml($document->getNumber()); ?></a> 
+        </td>
+        <td><?= $this->escapeHtml($document->getDepartIssue()); ?></td>        
+        <td><?= $this->escapeHtml($document->getDateIssue()); ?></td>
+        <td><?= $this->escapeHtml($document->getAuthor()); ?></td>
+  
+        <td>
+     <? if ($auth==($document->getAuthor())){ 
+        
+          echo "  <a class='btn btn-info' href=".$this->url('documents', 
+                    ['action'=>'edit', 'id'=>$document->getId()]).">
+                <span class='glyphicon glyphicon-pencil' ></span> Подправить
+            </a>
+            <a class='btn btn-danger' href=".$this->url('documents',
+                    ['action'=>'delete', 'id'=>$document->getId()]).">
+                <span class='glyphicon glyphicon-trash'></span> Удалить
+            </a>";}
+       ?>
+     
+        </td>    
+    </tr>
+     
+    <?php endforeach; ?>  
+    <?= $this->paginationControl($documents,
+            'Sliding',
+            'user/partial/paginator',
+            [
+            'id'=>$id,
+            'field'=>$field,
+            'order'=>$order,]
+            ); ?>
+    
+</table>
+
